@@ -5,9 +5,9 @@ import { ImagesSlider } from "./ui/images-slider";
 
 export function HeroSection() {
   const images = [
-    "/images/1.jpg",
-    "/images/2.jpg",
-    "/images/3.jpg",
+    "/images/1.webp",
+    "/images/2.webp",
+    "/images/3.webp",
   ];
   return (
     <ImagesSlider className="h-screen" images={images}>
