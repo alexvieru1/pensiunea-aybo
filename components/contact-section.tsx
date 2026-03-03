@@ -48,7 +48,7 @@ export function ContactSection() {
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, delay: 0.04, ease: cubicBezier(0.22, 0.61, 0.36, 1) }}
         >
-          <Card className="h-full border-neutral-200 bg-white">
+          <Card className="border-neutral-200 bg-white">
             <CardHeader>
               <CardTitle>Detalii de contact</CardTitle>
               <CardDescription>Ne găsești ușor, on-site sau online.</CardDescription>
@@ -59,7 +59,7 @@ export function ContactSection() {
                 <div>
                   <p className="font-medium">Pensiunea Aybo</p>
                   <p className="text-sm text-neutral-600">
-                    Str. Exemplu 12, Agigea, Constanța
+                    Str. Brizei 22, 907015 Agigea, România
                   </p>
                 </div>
               </div>
@@ -71,12 +71,12 @@ export function ContactSection() {
                 </a>
               </div>
 
-              {/* <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
                 <IconMail className="h-5 w-5" />
-                <a href="mailto:rezervari@aybo.ro" className="text-sm hover:underline">
-                  rezervari@aybo.ro
+                <a href="mailto:contact@pensiuneaaybo.ro" className="text-sm hover:underline">
+                  contact@pensiuneaaybo.ro
                 </a>
-              </div> */}
+              </div>
 
               <div className="flex items-start gap-3">
                 <IconClock className="h-5 w-5" />
@@ -87,22 +87,36 @@ export function ContactSection() {
               </div>
             </CardContent>
             <CardFooter className="flex gap-3">
+              {/* TODO: replace "#" with actual Facebook page URL */}
               <a
-                href="https://facebook.com"
+                href="#"
                 aria-label="Facebook"
-                className="rounded-md border border-neutral-200 px-3 py-2 text-sm hover:translate-y-[-2px] transition"
+                className="rounded-md border border-neutral-200 px-3 py-2 text-sm opacity-50 cursor-default"
               >
                 <IconBrandFacebook className="h-5 w-5" />
               </a>
+              {/* TODO: replace "#" with actual Instagram page URL */}
               <a
-                href="https://instagram.com"
+                href="#"
                 aria-label="Instagram"
-                className="rounded-md border border-neutral-200 px-3 py-2 text-sm hover:translate-y-[-2px] transition"
+                className="rounded-md border border-neutral-200 px-3 py-2 text-sm opacity-50 cursor-default"
               >
                 <IconBrandInstagram className="h-5 w-5" />
               </a>
             </CardFooter>
           </Card>
+          <div className="mt-6 overflow-hidden rounded-lg border border-neutral-200">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.8!2d28.636!3d44.088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40baec4f3a3c5c8d%3A0x0!2sStr.+Brizei+22%2C+Agigea+907015!5e0!3m2!1sen!2sro!4v1709500000000"
+              width="100%"
+              height="250"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Locația Pensiunea Aybo"
+            />
+          </div>
         </motion.div>
 
         {/* Contact form */}

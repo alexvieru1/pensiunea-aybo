@@ -39,22 +39,24 @@ export function SiteFooter() {
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-sm">
               <IconMapPin className="h-5 w-5" />
-              Str. Exemplu 12, Agigea
+              Str. Brizei 22, 907015 Agigea
             </div>
             <a href="tel:+40785203576" className="flex items-center gap-2 text-sm hover:underline">
               <IconPhone className="h-5 w-5" />
               +40 785 203 576
             </a>
-            {/* <a href="mailto:rezervari@aybo.ro" className="flex items-center gap-2 text-sm hover:underline">
+            <a href="mailto:contact@pensiuneaaybo.ro" className="flex items-center gap-2 text-sm hover:underline">
               <IconMail className="h-5 w-5" />
-              rezervari@aybo.ro
-            </a> */}
+              contact@pensiuneaaybo.ro
+            </a>
 
             <div className="mt-2 flex gap-3">
-              <a href="https://facebook.com" aria-label="Facebook" className="rounded-md border border-neutral-200 px-3 py-2">
+              {/* TODO: replace "#" with actual Facebook page URL */}
+              <a href="#" aria-label="Facebook" className="rounded-md border border-neutral-200 px-3 py-2 opacity-50 cursor-default">
                 <IconBrandFacebook className="h-5 w-5" />
               </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="rounded-md border border-neutral-200 px-3 py-2">
+              {/* TODO: replace "#" with actual Instagram page URL */}
+              <a href="#" aria-label="Instagram" className="rounded-md border border-neutral-200 px-3 py-2 opacity-50 cursor-default">
                 <IconBrandInstagram className="h-5 w-5" />
               </a>
             </div>
@@ -65,7 +67,7 @@ export function SiteFooter() {
           <p>© {new Date().getFullYear()} Pensiunea Aybo. Toate drepturile rezervate.</p>
           <p>
             Realizat cu <span aria-hidden>♥</span> —{" "}
-            <a href="#" className="hover:underline">Termeni &amp; Politică</a>
+            <a href="/termeni" className="hover:underline">Termeni &amp; Politică</a>
           </p>
         </div>
       </motion.div>
