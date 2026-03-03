@@ -15,6 +15,8 @@ import { Badge } from "@/components/ui/badge";
 import { IconCheck } from "@tabler/icons-react";
 import React from "react";
 
+const BOOKING_URL = "https://www.booking.com/hotel/ro/pensiunea-aybo.ro.html";
+
 type Plan = {
   name: string;
   price: string;
@@ -40,7 +42,7 @@ const plans: Plan[] = [
       "Baie privată",
     ],
     ctaLabel: "Rezervă acum",
-    ctaHref: "#rezerva-standard",
+    ctaHref: BOOKING_URL,
   },
   {
     name: "Family",
@@ -55,7 +57,7 @@ const plans: Plan[] = [
       "Balcon / vedere grădină",
     ],
     ctaLabel: "Rezervă Family",
-    ctaHref: "#rezerva-family",
+    ctaHref: BOOKING_URL,
     popular: true,
   },
   {
@@ -71,7 +73,7 @@ const plans: Plan[] = [
       "Late check-out (la disponibilitate)",
     ],
     ctaLabel: "Rezervă Premium",
-    ctaHref: "#rezerva-premium",
+    ctaHref: BOOKING_URL,
   },
 ];
 
@@ -138,7 +140,7 @@ export function PricingSection() {
 
               <CardFooter className="pt-2">
                 <Button asChild className="w-full">
-                  <a href={plan.ctaHref}>{plan.ctaLabel}</a>
+                  <a href={plan.ctaHref} target="_blank" rel="noopener noreferrer">{plan.ctaLabel}</a>
                 </Button>
               </CardFooter>
             </Card>
