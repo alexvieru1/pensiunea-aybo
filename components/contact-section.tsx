@@ -21,10 +21,14 @@ import {
   IconClock,
   IconBrandFacebook,
   IconBrandInstagram,
+  IconCheck,
 } from "@tabler/icons-react";
-import React from "react";
+import React, { useState } from "react";
 
 export function ContactSection() {
+  const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-20 scroll-mt-[50px]" id="contact">
       <div className="mb-12 text-center">
@@ -127,54 +131,100 @@ export function ContactSection() {
           transition={{ duration: 0.5, delay: 0.12, ease: cubicBezier(0.22, 0.61, 0.36, 1) }}
         >
           <Card className="h-full border-neutral-200 bg-white">
-            <CardHeader>
-              <CardTitle>Trimite un mesaj</CardTitle>
-              <CardDescription>Spune-ne perioada și preferințele tale.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form
-                className="space-y-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  // TODO: wire up your submission (API route or 3rd-party)
-                }}
-              >
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Nume</Label>
-                    <Input id="name" name="name" placeholder="Nume complet" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Telefon</Label>
-                    <Input id="phone" name="phone" placeholder="+40 ..." />
-                  </div>
+            {formState === "success" ? (
+              <CardContent>
+                <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+                  <IconCheck className="h-12 w-12 text-green-600" />
+                  <p className="text-lg font-medium">Mesajul a fost trimis!</p>
+                  <p className="text-sm text-neutral-600">Te vom contacta in cel mai scurt timp.</p>
                 </div>
+              </CardContent>
+            ) : (
+              <>
+                <CardHeader>
+                  <CardTitle>Trimite un mesaj</CardTitle>
+                  <CardDescription>Spune-ne perioada si preferintele tale.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form
+                    className="space-y-4"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      setFormState("loading");
+                      setErrorMessage("");
 
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="exemplu@email.com"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="dates">Perioada</Label>
-                    <Input id="dates" name="dates" placeholder="ex: 12–15 iulie" />
-                  </div>
-                </div>
+                      const formData = new FormData(e.currentTarget);
+                      const data = {
+                        name: formData.get("name"),
+                        phone: formData.get("phone"),
+                        email: formData.get("email"),
+                        dates: formData.get("dates"),
+                        message: formData.get("message"),
+                      };
 
-                <div className="space-y-2">
-                  <Label htmlFor="message">Mesaj</Label>
-                  <Textarea id="message" name="message" rows={4} placeholder="Scrie mesajul..." />
-                </div>
+                      try {
+                        const res = await fetch("/api/contact", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify(data),
+                        });
 
-                <Button type="submit" className="w-full">Trimite</Button>
-              </form>
-            </CardContent>
+                        if (!res.ok) {
+                          const err = await res.json();
+                          throw new Error(err.error || "Eroare la trimitere.");
+                        }
+
+                        setFormState("success");
+                      } catch (err) {
+                        setFormState("error");
+                        setErrorMessage(err instanceof Error ? err.message : "Eroare la trimitere.");
+                      }
+                    }}
+                  >
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Nume</Label>
+                        <Input id="name" name="name" placeholder="Nume complet" required />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Telefon</Label>
+                        <Input id="phone" name="phone" placeholder="+40 ..." />
+                      </div>
+                    </div>
+
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="exemplu@email.com"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="dates">Perioada</Label>
+                        <Input id="dates" name="dates" placeholder="ex: 12-15 iulie" />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="message">Mesaj</Label>
+                      <Textarea id="message" name="message" rows={4} placeholder="Scrie mesajul..." />
+                    </div>
+
+                    {formState === "error" && (
+                      <p className="text-sm text-red-600">{errorMessage}</p>
+                    )}
+
+                    <Button type="submit" className="w-full" disabled={formState === "loading"}>
+                      {formState === "loading" ? "Se trimite..." : "Trimite"}
+                    </Button>
+                  </form>
+                </CardContent>
+              </>
+            )}
           </Card>
         </motion.div>
       </motion.div>
