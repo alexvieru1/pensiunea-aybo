@@ -41,6 +41,17 @@ const images = [
   },
 ];
 
+// Desktop layout: row 1-2 = hero(2col,2row) + 4 squares, row 3 = 2 wide images
+const desktopConfig = [
+  { className: "md:col-span-2 md:row-span-2 md:h-full", aspect: "aspect-[4/3] md:aspect-auto md:h-full" },
+  { className: "", aspect: "aspect-square" },
+  { className: "", aspect: "aspect-square" },
+  { className: "", aspect: "aspect-square" },
+  { className: "", aspect: "aspect-square" },
+  { className: "md:col-span-2", aspect: "aspect-[4/3] md:aspect-[2/1]" },
+  { className: "md:col-span-2", aspect: "aspect-[4/3] md:aspect-[2/1]" },
+];
+
 export function GallerySection() {
   const [lightbox, setLightbox] = useState<number | null>(null);
 
@@ -50,7 +61,6 @@ export function GallerySection() {
         id="galerie"
         className="relative bg-charcoal-900 py-24 lg:py-32"
       >
-        {/* Decorative top border */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal-500/30 to-transparent" />
 
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -70,40 +80,40 @@ export function GallerySection() {
             </div>
           </ScrollReveal>
 
-          {/* Gallery grid */}
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-            {images.map((img, i) => (
-              <ScrollReveal
-                key={img.src}
-                delay={i * 80}
-                className={i === 0 ? "col-span-2 row-span-2" : ""}
-              >
-                <button
-                  onClick={() => setLightbox(i)}
-                  className={`group relative w-full overflow-hidden rounded-xl ${
-                    i === 0 ? "aspect-[4/3]" : "aspect-square"
-                  }`}
+            {images.map((img, i) => {
+              const config = desktopConfig[i];
+              return (
+                <ScrollReveal
+                  key={img.src}
+                  delay={i * 80}
+                  className={config.className}
                 >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes={
-                      i === 0
-                        ? "(max-width: 768px) 100vw, 50vw"
-                        : "(max-width: 768px) 50vw, 25vw"
-                    }
-                  />
-                  <div className="absolute inset-0 bg-charcoal-950/0 transition-all duration-300 group-hover:bg-charcoal-950/30" />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="rounded-full bg-white/20 p-3 backdrop-blur-sm">
-                      <IconZoomIn size={20} className="text-white" stroke={2} />
+                  <button
+                    onClick={() => setLightbox(i)}
+                    className={`group relative w-full overflow-hidden rounded-xl ${config.aspect}`}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes={
+                        i === 0
+                          ? "(max-width: 768px) 100vw, 50vw"
+                          : "(max-width: 768px) 50vw, 25vw"
+                      }
+                    />
+                    <div className="absolute inset-0 bg-charcoal-950/0 transition-all duration-300 group-hover:bg-charcoal-950/30" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <div className="rounded-full bg-white/20 p-3 backdrop-blur-sm">
+                        <IconZoomIn size={20} className="text-white" stroke={2} />
+                      </div>
                     </div>
-                  </div>
-                </button>
-              </ScrollReveal>
-            ))}
+                  </button>
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -122,7 +132,6 @@ export function GallerySection() {
             <IconX size={32} stroke={1.5} />
           </button>
 
-          {/* Navigation */}
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -162,7 +171,6 @@ export function GallerySection() {
             <IconChevronRight size={24} stroke={2} />
           </button>
 
-          {/* Counter */}
           <div className="absolute bottom-6 text-sm text-white/50">
             {lightbox + 1} / {images.length}
           </div>

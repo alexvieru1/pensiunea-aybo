@@ -217,16 +217,36 @@ export function ContactSection() {
                     />
                   </div>
 
+                  <div className="flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      id="gdpr"
+                      name="gdpr"
+                      required
+                      className="mt-1 h-4 w-4 shrink-0 rounded border-sand-300 text-teal-700 accent-teal-700"
+                    />
+                    <label
+                      htmlFor="gdpr"
+                      className="text-xs leading-relaxed text-charcoal-500"
+                    >
+                      Sunt de acord cu prelucrarea datelor personale conform{" "}
+                      <a
+                        href="/politica-confidentialitate"
+                        target="_blank"
+                        className="font-medium text-teal-700 underline decoration-teal-300 underline-offset-2"
+                      >
+                        Politicii de Confidențialitate
+                      </a>
+                      . *
+                    </label>
+                  </div>
+
                   <button
                     type="submit"
                     className="w-full rounded-xl bg-teal-700 px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-teal-800 hover:shadow-lg hover:shadow-teal-200/50"
                   >
                     Trimite Mesajul
                   </button>
-
-                  <p className="text-center text-xs text-charcoal-400">
-                    Datele dumneavoastră sunt protejate conform GDPR.
-                  </p>
                 </form>
               )}
             </div>

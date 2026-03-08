@@ -31,13 +31,13 @@ export function Navbar() {
       >
         <Image
           src="/images/POPAM_logo.webp"
-          alt="POPAM 2014-2020"
+          alt="POPAM Logo"
           width={80}
           height={30}
           className="h-6 w-auto"
         />
         <span className="font-body tracking-wide">
-          Proiect cofinanțat prin POPAM 2014–2020
+          Proiect cofinanțat prin POPAM
         </span>
       </div>
 

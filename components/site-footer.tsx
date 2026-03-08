@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { IconPhone } from "@tabler/icons-react";
 
 export function SiteFooter() {
@@ -71,14 +72,14 @@ export function SiteFooter() {
             <div className="rounded-xl border border-charcoal-700/50 bg-charcoal-800/50 p-4">
               <Image
                 src="/images/POPAM_logo.webp"
-                alt="POPAM 2014-2020 - Susține Inițiativa Ta!"
+                alt="POPAM Logo"
                 width={200}
                 height={80}
                 className="h-16 w-auto"
               />
               <p className="mt-3 text-xs leading-relaxed text-charcoal-400">
                 Proiect cofinanțat prin Programul Operațional pentru Pescuit și
-                Afaceri Maritime (POPAM) 2014–2020.
+                Afaceri Maritime (POPAM).
               </p>
             </div>
           </div>
@@ -91,6 +92,18 @@ export function SiteFooter() {
             rezervate.
           </p>
           <div className="flex gap-6">
+            <Link
+              href="/politica-confidentialitate"
+              className="transition-colors hover:text-teal-400"
+            >
+              Confidențialitate
+            </Link>
+            <Link
+              href="/termeni-conditii"
+              className="transition-colors hover:text-teal-400"
+            >
+              Termeni și Condiții
+            </Link>
             <a
               href="https://www.booking.com/hotel/ro/pensiunea-aybo.ro.html"
               target="_blank"

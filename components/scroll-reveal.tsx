@@ -28,10 +28,13 @@ export function ScrollReveal({
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
-    observer.observe(el);
+    // Use rAF to ensure layout is settled before observing
+    requestAnimationFrame(() => {
+      observer.observe(el);
+    });
     return () => observer.disconnect();
   }, [delay]);
 
