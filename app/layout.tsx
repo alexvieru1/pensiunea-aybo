@@ -1,62 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Raleway } from "next/font/google";
 import "./globals.css";
-import { CookieConsent } from "@/components/cookie-consent";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const raleway = Raleway({
+  variable: "--font-raleway",
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pensiuneaaybo.ro"),
-  title: {
-    default: "Pensiunea Aybo | Cazare Agigea, Constanța",
-    template: "%s | Pensiunea Aybo",
-  },
+  title: "Pensiunea Aybo | Cazare Premium în Agigea, Constanța",
   description:
-    "Pensiunea Aybo — cazare confortabilă în Agigea, lângă Eforie Nord. Camere cu aer condiționat, parcare gratuită, piscină și acces facil la plajă.",
-  keywords: [
-    "pensiune Agigea",
-    "cazare Agigea",
-    "cazare Eforie Nord",
-    "pensiune litoralul romanesc",
-    "Pensiunea Aybo",
-    "hotel Agigea",
-  ],
-  authors: [{ name: "Pensiunea Aybo" }],
+    "Pensiunea Aybo oferă cazare modernă și confortabilă pe Str. Brizei Nr. 22, Agigea, cu vedere la lac. Apartamente premium cu facilități complete, lângă Constanța.",
+  keywords:
+    "pensiune agigea, cazare agigea, pensiunea aybo, cazare constanta, vedere lac",
   openGraph: {
-    title: "Pensiunea Aybo | Cazare Agigea, Constanța",
+    title: "Pensiunea Aybo | Cazare Premium în Agigea",
     description:
-      "Un loc liniștit aproape de mare — camere confortabile, grădină și acces facil la plajă.",
-    url: "https://pensiuneaaybo.ro",
-    siteName: "Pensiunea Aybo",
-    locale: "ro_RO",
+      "Cazare modernă cu vedere la lac în Agigea, lângă Constanța. Apartamente premium.",
     type: "website",
-    images: [
-      {
-        url: "/images/1.webp",
-        width: 1200,
-        height: 630,
-        alt: "Pensiunea Aybo - Cazare Agigea",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Pensiunea Aybo | Cazare Agigea",
-    description:
-      "Cazare confortabilă în Agigea, lângă Eforie Nord. Piscină, parcare, mic dejun.",
-    images: ["/images/1.webp"],
-  },
-  robots: {
-    index: true,
-    follow: true,
+    locale: "ro_RO",
   },
 };
 
@@ -68,49 +37,9 @@ export default function RootLayout({
   return (
     <html lang="ro">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${playfair.variable} ${raleway.variable} antialiased grain`}
       >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LodgingBusiness",
-              name: "Pensiunea Aybo",
-              description:
-                "Cazare confortabilă în Agigea, lângă Eforie Nord.",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Str. Brizei 22",
-                addressLocality: "Agigea",
-                postalCode: "907015",
-                addressCountry: "RO",
-              },
-              telephone: "+40785203576",
-              priceRange: "199-399 RON",
-              amenityFeature: [
-                {
-                  "@type": "LocationFeatureSpecification",
-                  name: "Wi-Fi gratuit",
-                },
-                {
-                  "@type": "LocationFeatureSpecification",
-                  name: "Parcare gratuită",
-                },
-                {
-                  "@type": "LocationFeatureSpecification",
-                  name: "Piscină",
-                },
-                {
-                  "@type": "LocationFeatureSpecification",
-                  name: "Aer condiționat",
-                },
-              ],
-            }),
-          }}
-        />
         {children}
-        <CookieConsent />
       </body>
     </html>
   );

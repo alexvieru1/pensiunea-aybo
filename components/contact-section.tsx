@@ -1,233 +1,238 @@
 "use client";
 
-import { motion } from "motion/react";
-import { cubicBezier } from "motion";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import {
-  IconMapPin,
-  IconMail,
-  IconPhone,
-  IconClock,
-  IconBrandFacebook,
-  IconBrandInstagram,
-  IconCheck,
-} from "@tabler/icons-react";
-import React, { useState } from "react";
+import { useState, type FormEvent } from "react";
+import { IconPhone, IconCheck } from "@tabler/icons-react";
+import { ScrollReveal } from "./scroll-reveal";
 
 export function ContactSection() {
-  const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20 scroll-mt-[50px]" id="contact">
-      <div className="mb-12 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">Contact</h2>
-        <p className="mt-2 text-sm text-neutral-600">
-          Scrie-ne sau dă-ne un telefon — răspundem rapid.
-        </p>
-      </div>
+    <section id="contact" className="relative overflow-x-clip py-24 lg:py-32">
+      <div className="absolute -right-48 top-0 h-96 w-96 rounded-full bg-teal-50 blur-3xl" />
 
-      <motion.div
-        className="grid gap-6 md:grid-cols-2"
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.45, ease: cubicBezier(0.22, 0.61, 0.36, 1) }}
-      >
-        {/* Contact info */}
-        <motion.div
-          initial={{ opacity: 0, y: 14, scale: 0.98 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.04, ease: cubicBezier(0.22, 0.61, 0.36, 1) }}
-        >
-          <Card className="border-neutral-200 bg-white">
-            <CardHeader>
-              <CardTitle>Detalii de contact</CardTitle>
-              <CardDescription>Ne găsești ușor, on-site sau online.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-start gap-3">
-                <IconMapPin className="h-5 w-5" />
-                <div>
-                  <p className="font-medium">Pensiunea Aybo</p>
-                  <p className="text-sm text-neutral-600">
-                    Str. Brizei 22, 907015 Agigea, România
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <IconPhone className="h-5 w-5" />
-                <a href="tel:+40785203576" className="text-sm hover:underline">
-                  +40 785 203 576
-                </a>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <IconMail className="h-5 w-5" />
-                <a href="mailto:contact@pensiuneaaybo.ro" className="text-sm hover:underline">
-                  contact@pensiuneaaybo.ro
-                </a>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <IconClock className="h-5 w-5" />
-                <div className="text-sm text-neutral-700">
-                  <p>Check-in: 14:00 – 22:00</p>
-                  <p>Check-out: până la 11:00</p>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="flex gap-3">
-              {/* TODO: replace "#" with actual Facebook page URL */}
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="rounded-md border border-neutral-200 px-3 py-2 text-sm opacity-50 cursor-default"
-              >
-                <IconBrandFacebook className="h-5 w-5" />
-              </a>
-              {/* TODO: replace "#" with actual Instagram page URL */}
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="rounded-md border border-neutral-200 px-3 py-2 text-sm opacity-50 cursor-default"
-              >
-                <IconBrandInstagram className="h-5 w-5" />
-              </a>
-            </CardFooter>
-          </Card>
-          <div className="mt-6 overflow-hidden rounded-lg border border-neutral-200">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.8!2d28.636!3d44.088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40baec4f3a3c5c8d%3A0x0!2sStr.+Brizei+22%2C+Agigea+907015!5e0!3m2!1sen!2sro!4v1709500000000"
-              width="100%"
-              height="250"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Locația Pensiunea Aybo"
-            />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="mb-16 text-center">
+            <span className="text-xs uppercase tracking-[0.3em] text-teal-700">
+              Contact
+            </span>
+            <h2 className="mt-3 font-display text-4xl font-bold text-charcoal-900 sm:text-5xl">
+              Luați{" "}
+              <span className="italic text-teal-700">legătura</span>{" "}
+              cu noi
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-charcoal-500">
+              Aveți întrebări sau doriți informații suplimentare? Nu ezitați
+              să ne contactați.
+            </p>
           </div>
-        </motion.div>
+        </ScrollReveal>
 
-        {/* Contact form */}
-        <motion.div
-          initial={{ opacity: 0, y: 14, scale: 0.98 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.12, ease: cubicBezier(0.22, 0.61, 0.36, 1) }}
-        >
-          <Card className="h-full border-neutral-200 bg-white">
-            {formState === "success" ? (
-              <CardContent>
-                <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
-                  <IconCheck className="h-12 w-12 text-green-600" />
-                  <p className="text-lg font-medium">Mesajul a fost trimis!</p>
-                  <p className="text-sm text-neutral-600">Te vom contacta in cel mai scurt timp.</p>
-                </div>
-              </CardContent>
-            ) : (
-              <>
-                <CardHeader>
-                  <CardTitle>Trimite un mesaj</CardTitle>
-                  <CardDescription>Spune-ne perioada si preferintele tale.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={async (e) => {
-                      e.preventDefault();
-                      setFormState("loading");
-                      setErrorMessage("");
+        <div className="grid gap-12 lg:grid-cols-5">
+          {/* Contact info */}
+          <ScrollReveal delay={100} className="lg:col-span-2">
+            <div className="space-y-8">
+              <div>
+                <h3 className="font-display text-lg font-bold text-charcoal-900">
+                  Telefon
+                </h3>
+                <a
+                  href="tel:+40785203576"
+                  className="mt-2 inline-flex items-center gap-2 text-lg font-semibold text-teal-700 transition-colors hover:text-teal-600"
+                >
+                  <IconPhone size={20} stroke={1.5} />
+                  0785 203 576
+                </a>
+              </div>
 
-                      const formData = new FormData(e.currentTarget);
-                      const data = {
-                        name: formData.get("name"),
-                        phone: formData.get("phone"),
-                        email: formData.get("email"),
-                        dates: formData.get("dates"),
-                        message: formData.get("message"),
-                      };
+              <div>
+                <h3 className="font-display text-lg font-bold text-charcoal-900">
+                  Locație
+                </h3>
+                <p className="mt-2 text-charcoal-600">
+                  Str. Brizei Nr. 22, Agigea
+                  <br />
+                  Județul Constanța, România
+                </p>
+              </div>
 
-                      try {
-                        const res = await fetch("/api/contact", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify(data),
-                        });
+              <div>
+                <h3 className="font-display text-lg font-bold text-charcoal-900">
+                  Program
+                </h3>
+                <p className="mt-2 text-charcoal-600">
+                  Check-in: 14:00 – 22:00
+                  <br />
+                  Check-out: până la 11:00
+                </p>
+              </div>
 
-                        if (!res.ok) {
-                          const err = await res.json();
-                          throw new Error(err.error || "Eroare la trimitere.");
-                        }
-
-                        setFormState("success");
-                      } catch (err) {
-                        setFormState("error");
-                        setErrorMessage(err instanceof Error ? err.message : "Eroare la trimitere.");
-                      }
-                    }}
+              <div>
+                <h3 className="font-display text-lg font-bold text-charcoal-900">
+                  Rezervări Online
+                </h3>
+                <p className="mt-2 text-charcoal-600">
+                  Puteți rezerva și pe{" "}
+                  <a
+                    href="https://www.booking.com/hotel/ro/pensiunea-aybo.ro.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-teal-700 underline decoration-teal-300 underline-offset-2 transition-colors hover:text-teal-600"
                   >
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Nume</Label>
-                        <Input id="name" name="name" placeholder="Nume complet" required />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Telefon</Label>
-                        <Input id="phone" name="phone" placeholder="+40 ..." />
-                      </div>
+                    Booking.com
+                  </a>
+                </p>
+              </div>
+
+              {/* Map */}
+              <div className="aspect-video overflow-hidden rounded-xl border border-sand-200 bg-sand-100">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2850!2d28.6285!3d44.0835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40bae5b0a65e0e5d%3A0xf3c8e5e4c63a60b6!2sStrada%20Brizei%2022%2C%20Agigea%2C%20Constan%C8%9Ba!5e0!3m2!1sro!2sro!4v1710000000000!5m2!1sro!2sro"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Locația Pensiunea Aybo pe hartă"
+                />
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Contact form */}
+          <ScrollReveal delay={200} className="lg:col-span-3">
+            <div className="rounded-2xl border border-sand-200/80 bg-white p-8 shadow-sm lg:p-10">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <div className="mb-4 inline-flex rounded-full bg-teal-50 p-4 text-teal-700">
+                    <IconCheck size={32} stroke={2} />
+                  </div>
+                  <h3 className="font-display text-2xl font-bold text-charcoal-900">
+                    Mesaj trimis!
+                  </h3>
+                  <p className="mt-2 text-charcoal-500">
+                    Vă mulțumim pentru mesaj. Vă vom contacta în cel mai scurt
+                    timp posibil.
+                  </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="mt-6 text-sm font-semibold text-teal-700 underline decoration-teal-300 underline-offset-2"
+                  >
+                    Trimite alt mesaj
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="mb-2 block text-sm font-medium text-charcoal-700"
+                      >
+                        Nume complet
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        className="w-full rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 text-sm text-charcoal-800 outline-none transition-all duration-300 placeholder:text-charcoal-300 focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
+                        placeholder="ex. Ion Popescu"
+                      />
                     </div>
-
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="exemplu@email.com"
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="dates">Perioada</Label>
-                        <Input id="dates" name="dates" placeholder="ex: 12-15 iulie" />
-                      </div>
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="mb-2 block text-sm font-medium text-charcoal-700"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        className="w-full rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 text-sm text-charcoal-800 outline-none transition-all duration-300 placeholder:text-charcoal-300 focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
+                        placeholder="email@exemplu.ro"
+                      />
                     </div>
+                  </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Mesaj</Label>
-                      <Textarea id="message" name="message" rows={4} placeholder="Scrie mesajul..." />
-                    </div>
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="mb-2 block text-sm font-medium text-charcoal-700"
+                    >
+                      Telefon
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      className="w-full rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 text-sm text-charcoal-800 outline-none transition-all duration-300 placeholder:text-charcoal-300 focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
+                      placeholder="07xx xxx xxx"
+                    />
+                  </div>
 
-                    {formState === "error" && (
-                      <p className="text-sm text-red-600">{errorMessage}</p>
-                    )}
+                  <div>
+                    <label
+                      htmlFor="subject"
+                      className="mb-2 block text-sm font-medium text-charcoal-700"
+                    >
+                      Subiect
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      className="w-full rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 text-sm text-charcoal-800 outline-none transition-all duration-300 focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
+                    >
+                      <option value="rezervare">Informații rezervare</option>
+                      <option value="disponibilitate">Disponibilitate</option>
+                      <option value="facilitati">Facilități</option>
+                      <option value="altele">Altele</option>
+                    </select>
+                  </div>
 
-                    <Button type="submit" className="w-full" disabled={formState === "loading"}>
-                      {formState === "loading" ? "Se trimite..." : "Trimite"}
-                    </Button>
-                  </form>
-                </CardContent>
-              </>
-            )}
-          </Card>
-        </motion.div>
-      </motion.div>
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="mb-2 block text-sm font-medium text-charcoal-700"
+                    >
+                      Mesaj
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={4}
+                      className="w-full resize-none rounded-xl border border-sand-200 bg-sand-50 px-4 py-3 text-sm text-charcoal-800 outline-none transition-all duration-300 placeholder:text-charcoal-300 focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
+                      placeholder="Scrieți mesajul dvs. aici..."
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full rounded-xl bg-teal-700 px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-teal-800 hover:shadow-lg hover:shadow-teal-200/50"
+                  >
+                    Trimite Mesajul
+                  </button>
+
+                  <p className="text-center text-xs text-charcoal-400">
+                    Datele dumneavoastră sunt protejate conform GDPR.
+                  </p>
+                </form>
+              )}
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
     </section>
   );
 }
